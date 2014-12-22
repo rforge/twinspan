@@ -7,7 +7,7 @@
 create.tw.dat(input.file = "tw.cc!", omit.samples = -1,
   no.cut.levels = length(cut.levels), cut.levels = c(0, 2, 5, 10, 20),
   min.group.size = 5, max.no.ind = 7, max.no.sp.table = 100,
-  divisions = 6, long.input = 1, diagram = 0,
+  divisions = 6, long.output = 1, diagram = 0,
   machine.readable.output = 1, pseudosp.weights = -1,
   indicator.potential = -1, ommited.species = -1, samples.weights = -1,
   species.weights = -1)
@@ -29,6 +29,8 @@ create.tw.dat(input.file = "tw.cc!", omit.samples = -1,
 
 \item{divisions}{Number of hierarchical divisions (default = 6, should be between 0 and 15).}
 
+\item{long.output}{Should the long output be produced? (default = 1, means yes)}
+
 \item{diagram}{Should the diagram be appended in output? (default = 0, means no)}
 
 \item{machine.readable.output}{Should the machine readable output be created? (default = 1, means yes, and should not be changed, othewise the result cannot be read back to R)}
@@ -42,8 +44,6 @@ create.tw.dat(input.file = "tw.cc!", omit.samples = -1,
 \item{samples.weights}{Weights of samples.}
 
 \item{species.weights}{Weights of species.}
-
-\item{long.output}{Should the long output be produced? (default = 1, means yes)}
 }
 \value{
 Creates file \code{tw.dat} in the subdirectory \code{exec} of the \code{twinspan} library folder. This file contains all parameters needed to setup the TWINSPAN algorithm, and is loaded into \code{twinspan.exe} together with the community data (reformated into condensed format and stored in \code{tw.cc!}).

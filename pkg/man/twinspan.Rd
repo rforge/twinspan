@@ -41,7 +41,7 @@ XXX
 \examples{
 library (vegan)
 data (BCI)
-res <- twinspan (BCI, modif = T, no.clusters = 5, diss = 'bray')
+res <- twinspan (BCI, modif = TRUE, no.clusters = 5, diss = 'bray')
 k <- cutree.tw (res)
 dca <- decorana (BCI)
 ordiplot (dca, type = 'n', display = 'si')

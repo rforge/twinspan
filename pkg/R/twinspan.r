@@ -22,7 +22,7 @@
 #' @examples
 #' library (vegan)
 #' data (BCI)
-#' res <- twinspan (BCI, modif = T, no.clusters = 5, diss = 'bray')
+#' res <- twinspan (BCI, modif = TRUE, no.clusters = 5, diss = 'bray')
 #' k <- cutree.tw (res)
 #' dca <- decorana (BCI)
 #' ordiplot (dca, type = 'n', display = 'si')
@@ -57,8 +57,8 @@ twinspan <- function (com, modif = F, cut.levels = c(0,2,5,10,20), min.group.siz
     {
       if (diss == 'total.inertia' || diss == 'whittaker') 
         {
-        if (diss == 'total.inertia') cca (com[tw.class.level == x, ])$tot.chi else {com.t <- com > 0; gamma <- sum (colSums (com.t) > 0); alpha <- mean (rowSums (com.t)); (gamma/alpha)-1}
-        } else if (mean.median == 'mean') mean (vegdist (com[tw.class.level == x,], method = diss)) else median (vegdist (com[tw.class.level == x,], method = diss))
+        if (diss == 'total.inertia') vegan::cca (com[tw.class.level == x, ])$tot.chi else {com.t <- com > 0; gamma <- sum (colSums (com.t) > 0); alpha <- mean (rowSums (com.t)); (gamma/alpha)-1}
+        } else if (mean.median == 'mean') mean (vegan::vegdist (com[tw.class.level == x,], method = diss)) else median (vegan::vegdist (com[tw.class.level == x,], method = diss))
     }))
     sort.by.heter <- sort (unique (tw.class.level))[order (cluster.heter,decreasing = T)]
     no.samples.per.group <- unlist (lapply (sort.by.heter, FUN = function (no) sum (tw.class.level == no)))
@@ -81,7 +81,7 @@ twinspan0 <- function (com, cut.levels, min.group.size, divisions, ...)
   setwd (paste (.libPaths (), '/twinspan/exec/', sep = ''))
   if (is.integer (com[1,1])) com <- sapply (com, as.numeric)  # if the data frame contains integers instead of reals, it converts them to real (because of write.CEP in rioja can't handle integers)
   com <- com[,colSums (com) > 0]
-  write.CEP (com, fName = 'tw.cc!') 
+  rioja::write.CEP (com, fName = 'tw.cc!') 
   create.tw.dat (cut.levels = cut.levels, min.group.size = min.group.size, divisions = divisions, ...)
   shell ('tw.bat')
   
